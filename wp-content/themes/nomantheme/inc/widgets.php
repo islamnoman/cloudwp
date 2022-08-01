@@ -14,7 +14,7 @@ class Noman_Profile_Widget extends WP_Widget {
 	public function __construct() {
 		
 		$widget_ops = array(
-			'classname' => 'sunset-profile-widget',
+			'classname' => 'noman-profile-widget',
 			'description' => 'Custom Noman Profile Widget',
 		);
 		parent::__construct( 'noman_profile', 'Noman Profile', $widget_ops );
@@ -74,7 +74,7 @@ add_action( 'widgets_init', function() {
 	Edit default WordPress widgets
 */
 
-function sunset_tag_cloud_font_change( $args ) {
+function noman_tag_cloud_font_change( $args ) {
 	
 	$args['smallest'] = 8;
 	$args['largest'] = 8;
@@ -82,9 +82,9 @@ function sunset_tag_cloud_font_change( $args ) {
 	return $args;
 	
 }
-add_filter( 'widget_tag_cloud_args', 'sunset_tag_cloud_font_change' );
+add_filter( 'widget_tag_cloud_args', 'noman_tag_cloud_font_change' );
 
-function sunset_list_categories_output_change( $links ) {
+function noman_list_categories_output_change( $links ) {
 	
 	$links = str_replace('</a> (', '</a> <span>', $links);
 	$links = str_replace(')', '</span>', $links);
@@ -92,14 +92,14 @@ function sunset_list_categories_output_change( $links ) {
 	return $links;
 	
 }
-add_filter( 'wp_list_categories', 'sunset_list_categories_output_change' );
+add_filter( 'wp_list_categories', 'noman_list_categories_output_change' );
 
 /*
 	Save Posts views
 */
-function sunset_save_post_views( $postID ) {
+function noman_save_post_views( $postID ) {
 	
-	$metaKey = 'sunset_post_views';
+	$metaKey = 'noman_post_views';
 	$views = get_post_meta( $postID, $metaKey, true );
 	
 	$count = ( empty( $views ) ? 0 : $views );
@@ -114,16 +114,16 @@ remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0 );
 	Popular Posts Widget
 */
 
-class Sunset_Popular_Posts_Widget extends WP_Widget {
+class Noman_Popular_Posts_Widget extends WP_Widget {
 	
 	//setup the widget name, description, etc...
 	public function __construct() {
 		
 		$widget_ops = array(
-			'classname' => 'sunset-popular-posts-widget',
+			'classname' => 'noman-popular-posts-widget',
 			'description' => 'Popular Posts Widget',
 		);
-		parent::__construct( 'sunset_popular_posts', 'Sunset Popular Posts', $widget_ops );
+		parent::__construct( 'noman_popular_posts', 'Noman Popular Posts', $widget_ops );
 		
 	}
 	
@@ -166,7 +166,7 @@ class Sunset_Popular_Posts_Widget extends WP_Widget {
 		$posts_args = array(
 			'post_type'			=> 'post',
 			'posts_per_page'	=> $tot,
-			'meta_key'			=> 'sunset_post_views',
+			'meta_key'			=> 'noman_post_views',
 			'orderby'			=> 'meta_value_num',
 			'order'				=> 'DESC'
 		);
@@ -191,7 +191,7 @@ class Sunset_Popular_Posts_Widget extends WP_Widget {
 				echo '<div class="media-left"><img class="media-object" src="' . get_template_directory_uri() . '/img/post-' . ( get_post_format() ? get_post_format() : 'standard') . '.png" alt="' . get_the_title() . '"/></div>';
 				echo '<div class="media-body">';
 				echo '<a href="' . get_the_permalink() . '" title="' . get_the_title() . '">' . get_the_title() . '</a>';
-				echo '<div class="row"><div class="col-xs-12">'. sunset_posted_footer( true ) .'</div></div>';
+				echo '<div class="row"><div class="col-xs-12">'. noman_posted_footer( true ) .'</div></div>';
 				echo '</div>';
 				echo '</div>';
 				
@@ -208,7 +208,7 @@ class Sunset_Popular_Posts_Widget extends WP_Widget {
 }
 
 add_action( 'widgets_init', function() {
-	register_widget( 'Sunset_Popular_Posts_Widget' );
+	register_widget( 'Noman_Popular_Posts_Widget' );
 } );
 
 
